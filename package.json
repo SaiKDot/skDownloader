@@ -1,0 +1,38 @@
+{
+  "name": "skdownloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaiKDot/skDownloader.git"
+  },
+  "keywords": [
+    "downloader"
+  ],
+  "author": "BSK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaiKDot/skDownloader/issues"
+  },
+  "homepage": "https://github.com/SaiKDot/skDownloader#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@svgr/webpack": "^5.5.0",
+    "babel-loader": "^8.2.2",
+    "cfonts": "^2.10.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.3.0",
+    "css-minimizer-webpack-plugin": "^3.1.1",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1",
+    "webpack-hot-middleware": "^2.25.1"
+  }
+}
