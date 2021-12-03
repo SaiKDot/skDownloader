@@ -12,8 +12,11 @@ import * as consts from '../Actions/types'
         ...state, download_list: [...state.download_list,actions.payload]
       }        
         break;
-    
+      case consts.DOWNLOAD_TASK_CANCEL: return {
+        ...state, download_list: []
+      }
+      break
       default: return state;
-        break;
+        
     }
  }

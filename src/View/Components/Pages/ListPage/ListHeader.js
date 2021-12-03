@@ -1,9 +1,10 @@
-import React, {useEffect, useRef} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useEffect, useRef, memo} from 'react'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 import { ResizableBox  } from 'react-resizable'
  
- 
+ import _ from 'underscore'
+
 import { changeHeaderWidth, sortColumn } from '../../../Actions'
  
 import { SortDirection } from 'react-virtualized'
@@ -11,14 +12,11 @@ import { SortDirection } from 'react-virtualized'
 const ListHeader = props => {
 const dispatch = useDispatch()
 let headerRef = useRef(new Array())
-const {header_} = useSelector((state) => state.ui)
+const { header_ } = props
 
- useEffect(() => {
-      console.log('Header')
-     
-  },[]  )
+  
 const onResize = ( e, {event, node, size}) => {
-  console.log(size.width);
+   
   dispatch(changeHeaderWidth(node.id, size.width))
 }
 const handleDrag = (ev) => {
@@ -42,8 +40,8 @@ const handleSort = id => {
              key={header.id}
              handle={<DragHandle id={header.id} />}
              onResize={onResize}
-             minConstraints={[50, 20]}
-             maxConstraints={[300, 20]}
+             minConstraints={[100, 20]}
+             maxConstraints={[500, 20]}
            >
              <Header
                key={header.id}
@@ -63,7 +61,7 @@ const handleSort = id => {
 
 const HeaderBody = styled.div`
   background-color: #fff;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   & > * {
@@ -71,18 +69,23 @@ const HeaderBody = styled.div`
   }
   height: 20px;
   border-bottom: 1px solid #666666;
+  max-width: min-content;
   
 `
 export const Header = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  height: 100%;
   &::after {
     font-family: FontAwesome;
     content: '\f0dc';
     position: absolute;
     right: 8px;
     color: #999;
+  }
+  &:hover {
+    background-color: #d9ebf9;
   }
 `
 export const HeaderText = styled.div`
@@ -118,6 +121,6 @@ export const DragHandle = styled.div`
   background: darkgray;
   z-index: 999;
 `
-export default ListHeader
+export default memo(ListHeader)
 
  

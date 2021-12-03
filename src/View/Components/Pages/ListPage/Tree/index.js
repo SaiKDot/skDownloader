@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Archive_Folder from '../../../../Images//side/archive_folder.svg'
+import Archive_Folder from '../../../../Images/side/archive_folder.svg'
 import Document_Folder from '../../../../Images/side/documents_folder.svg'
 import Folder_Icon from '../../../../Images/side/folder.svg'
 import Music_Folder from '../../../../Images/side/music_folder.svg'

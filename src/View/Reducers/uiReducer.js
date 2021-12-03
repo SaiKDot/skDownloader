@@ -7,7 +7,8 @@ import * as consts from '../Actions/types'
    defaultSidePanelWidth: 75,
    selectedItems: [],
    sidePanel_width: 75,
-   columnSort: {column: 'name', sortBy: 'ASC'},
+   showTaskModal: false,
+   columnSort: { column: 'name', sortBy: 'ASC' },
    headerButtons: [
      {
        id: 'add',
@@ -74,7 +75,7 @@ import * as consts from '../Actions/types'
      {
        id: 'progress',
        name: 'Progress',
-       width: 200,
+       width: 500,
        order: 4,
      },
      {
@@ -86,46 +87,79 @@ import * as consts from '../Actions/types'
      {
        id: 'eta',
        name: 'Time Left',
-       width: 50,
+       width: 100,
        order: 6,
      },
    ],
+    nameWidth:200,
+    sizeWidth:70,
+    statusWidth:150,
+    progressWidth:500,
+    lastTryWidth:200,
+    etaWidth:50,
  }
 
 
 export default (state = initial_state, actions) => {
   switch (actions.type) {
-     case consts.CHANGE_HEADER_WIDTH :  return {
-       ...state,
-       header_: state.header_.map((item) =>
-         item.id === actions.payload.id
-           ? // transform the one with a matching id
-             { ...item, width: actions.payload.neWidth }
-           : // otherwise return original todo
-             item
-       ),
-     } 
+     case consts.CHANGE_HEADER_WIDTH :  {
+       switch(actions.column) {
+         case 'name' : {
+           return { ...state, nameWidth: actions.payload.neWidth }
+         }
+         break
+         case 'size' : {
+            return { ...state, sizeWidth: actions.payload.neWidth }
+         }
+         break
+         case 'status' : {
+            return { ...state, statusWidth: actions.payload.neWidth }
+         }
+         break
+         case 'progress' : {
+            return { ...state, progressWidth: actions.payload.neWidth }
+         }
+         break
+         case 'lasttry' : {
+            return { ...state, lastTryWidth: actions.payload.neWidth }
+         }
+         break
+         case 'eta' : {
+            return { ...state, etaWidth: actions.payload.neWidth }
+         }
+         break
+       }
+      
+    }
        
      break;
     case consts.CHANGE_SIDE_PANEL_WIDTH : return {
       ...state, sidePanel_width : actions.payload
     }
     break
-    case consts.CHANGE_HEADER_BUTTON_STATUS : {
+    case consts.CHNAGE_DELETE_BUTTON_STATUS : {
        
-       return {
-         ...state,
-         headerButtons: state.headerButtons.map((item) =>
-           item.id === actions.payload.id
-             ? // transform the one with a matching id
-               { ...item, disabled: actions.payload.status }
-             : // otherwise return original todo
-               item
-         ),
+      const index  = state.headerButtons.findIndex(item => item.id  == 'delete');
+      const newArray = [...state.headerButtons]
+       if(newArray[index].disabled == true) {
+            newArray[index].disabled = false
+            return {
+              ...state, //copying the orignal state
+              headerButtons: newArray, //reassingning todos to new array
+            }
        }
+       else {
+         return state
+       }
+       
+      
+      
     }
     break
-    case consts.TOGGLE_SIDEPANEL : return { ...state, sidePanel_width : 0}
+    case consts.TOGGLE_SIDEPANEL : {
+      console.log('red')
+       return { ...state, sidePanel_width: 0 }
+    }
     break;
     case consts.SELECT_ITEM : {
       return { ...state, selectedItem : actions.payload}
@@ -134,6 +168,8 @@ export default (state = initial_state, actions) => {
     case consts.UNSELECT_ALL_ITEM: {
       return {...state , selectedItem: null}
     }
+    break
+    case consts.TOGGLE_TASK_MODAL: return { ...state, showTaskModal: !state.showTaskModal, context_menu_display: false}
     break
     default: return state;
   }
