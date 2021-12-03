@@ -98,7 +98,7 @@ let webConfig = {
   resolve: {
     alias: {
       '@': path.join(__dirname, '../src/view'),
-      '@shared': path.join(__dirname, '../src/commmon'),
+      '@common': path.join(__dirname, '../src/common'),
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
   },

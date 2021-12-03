@@ -80,7 +80,7 @@ const dispatch = useDispatch()
     <Container ref={panelRef} onClick={() => dispatch(unSelectAll())}>
       <Header>
         <Text>Categories</Text>
-        <Close onClick={() => dispatch(toggleSidePanel())}>X</Close>
+        <Close onClick={() => { console.log('click'); dispatch(toggleSidePanel())}}>X</Close>
       </Header>
       <Panel>
         <Tree data={structure} />

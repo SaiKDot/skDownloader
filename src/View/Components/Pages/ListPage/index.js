@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState, useCallback,useLayoutEffect } from 'react'
 import Draggable from 'react-draggable'
 import _ from 'underscore'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import SplitPane from 'react-split-pane'
 import styled from 'styled-components'
 import moment from 'moment'
+
 import ListBody from './ListBody'
 import ListHeader from './ListHeader'
 import SidePanel from './SidePanel'
 import Header from '../../Header'
+import NewTaskModal from '../../Modal/NewTaskModal'
 import { changeHeaderWidth, changePanelWidth } from '../../../Actions'
 
 import 'react-virtualized/styles.css'
@@ -18,29 +20,42 @@ import Dropper from './Dropper'
 
 const ListPage = (props) => {
   const dispatch = useDispatch()
-  const sidePanel_width  = useSelector((state) => state.ui.sidePanel_width)
-  const [dragOn, setDragOn] = useState(false)
 
-   
+ 
+  const [width, setWidth] = useState(sidePanel_width)
+
+  const sidePanel_width  = useSelector((state) => state.ui.sidePanel_width)
+  const header_ = useSelector((state) => state.ui.header_)
+  const containerRef = useRef(null) 
+ 
+  useEffect(() => {
+    setWidth(sidePanel_width)
+     
+  }, [sidePanel_width])
 
   return (
     <Container>
-      
-      <Dropper disp={dragOn} />
+      <NewTaskModal />
       <Header />
-      <ListContainer>
+
+      <ListContainer ref={containerRef}>
         <SplitPane
           split="vertical"
-          minSize={80}
+          minSize={75}
           defaultSize={sidePanel_width}
           maxSize={200}
           onDragFinished={(size) => dispatch(changePanelWidth(size))}
+          className={sidePanel_width == 0 ? 'soloPane1' : ''}
+          allowResize={sidePanel_width == 0 ? false : true}
+          //onDragFinished={(size) => setWidth(prev => size)}
         >
           <SidePanel />
 
-          <ListPanel>
-            <ListHeader />
-            <ListBody />
+          <ListPanel width={width}>
+            <Xcontainer>
+              <ListHeader header_={header_} />
+              <ListBody />
+            </Xcontainer>
           </ListPanel>
         </SplitPane>
       </ListContainer>
@@ -49,7 +64,7 @@ const ListPage = (props) => {
 }
 
 const Container = styled.div`
-  background-color: #ffffff;
+  background-color: #fff;
   overflow: hidden;
   height: 100%;
   width: 100%;
@@ -65,6 +80,21 @@ const ListContainer = styled.div`
 const ListPanel = styled.div`
   /* width: calc(100% - ${(props) => props.width}px); */
   height: 100%;
+  /* width : ${({ width }) => width}; */
+  display: inline-block;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: calc(100vw - ${(props) => props.width}px);
 `
+
+const Xcontainer = styled.div`
+  
+  height: 100%;  
+  max-width: fit-content;
+  display: inline-flex;
+  flex-direction: column;
+`
+
+
 
 export default ListPage
