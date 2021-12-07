@@ -3,7 +3,8 @@ const initial_state = {
   new_filename_error: false,
   downloadTask: {
     name: null,
-    url: '',
+    nameMask:null,
+    url: [],
     name: '',
     directory: '',
     referer: '',

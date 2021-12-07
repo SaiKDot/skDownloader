@@ -7,6 +7,7 @@ import reducers from './Reducers'
 import thunk from 'redux-thunk'
 import { StyledEngineProvider } from '@mui/material/styles'
 import GlobalStyle from './Styles/font'
+import { createBrowserHistory } from 'history'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 

@@ -9,7 +9,7 @@ export const SORT_COLUMN = 'sort_column'
 export const SHOW_CONTEXT_MENU = 'show_context_menu'
 export const HIDE_CONTEXT_MENU = 'hide_context_menu'
 export const TOGGLE_TASK_MODAL = 'toggle_task_modal'
-
+export const HIDE_SIDEPANEL = 'HIDE_SIDEPANEL'
 export const STORE_DOWNLOAD_LIST = 'store_download_list'
 
 
@@ -30,3 +30,6 @@ export const NEW_FILE_NAME_ERROR = 'new_file_name_error'
 export const CHANGE_DEFAULT_DIRECTORY = 'change_default_directory'
 
 
+
+/* input */
+export const GET_BULK_LINKS = 'get_bulk_links'

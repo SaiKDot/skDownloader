@@ -156,8 +156,7 @@ export default (state = initial_state, actions) => {
       
     }
     break
-    case consts.TOGGLE_SIDEPANEL : {
-      console.log('red')
+    case consts.HIDE_SIDEPANEL : {
        return { ...state, sidePanel_width: 0 }
     }
     break;

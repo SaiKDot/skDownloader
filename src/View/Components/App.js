@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react'
-import { HashRouter, Route } from 'react-router-dom'
+// import { HashRouter, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import 'normalize.css'
 
 import ListPage from './Pages/ListPage'
+import BatchPage from './Pages/BatchPage'
 
 import '../Styles/custom.css'
 import '../Styles/simple-line-icons.min.css'
 
 
 const App = props => {
-  useEffect(() => {
-    document.addEventListener('contextmenu', (event) => event.preventDefault())
+  // useEffect(() => {
+  //   document.addEventListener('contextmenu', (event) => event.preventDefault())
 
-  },[])
+  // },[])
   return (
-    <HashRouter>
-      
+    <Router>
       <Route path="/" exact component={ListPage} />
-    </HashRouter>
+      <Route path="/batch" exact component={BatchPage} />
+    </Router>
   )
 }
 
