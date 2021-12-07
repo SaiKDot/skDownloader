@@ -55,8 +55,7 @@ export const changeHeaderDeleteIcon = (id, status) => {
 }
 
 export const toggleSidePanel = () => {
-  console.log('toggle');
-  return {type:consts.TOGGLE_SIDEPANEL}
+  return { type: consts.HIDE_SIDEPANEL }
 }
 
 export const unSelectAll = () => {
@@ -81,9 +80,9 @@ export const toggleTaskModal = () => {
 
 export const newNameInput = (input) => {
     return dispatch => {
-        if (/^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|*\?\\:<>/$"]*[^\.\|*\?\\:<>/$"]+$/i.test(input)) {
-            
-        }
+       
+      console.log(input)
+
     }
     
     
@@ -129,3 +128,14 @@ export const changeDirectory = (val) => {
     return { type: consts.CHANGE_DEFAULT_DIRECTORY, payload: val }
 }
 
+export const getBulkInput = (data, history) => {
+  return (dispatch) => {
+      // let array = data.toString().split('\r\n')
+      // console.log(array);
+      dispatch ({ type: consts.GET_BULK_LINKS, payload: data })
+      history.push('/batch')
+
+  }
+
+    
+}

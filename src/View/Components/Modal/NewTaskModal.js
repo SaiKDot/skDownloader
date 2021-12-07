@@ -52,69 +52,73 @@ const NewTaskModal = props => {
      <NiftyModal open={show} onClose={handleClose} width="65%">
        <FormContainer>
          <h4 style={{ margin: '5px' }}>New Download</h4>
-         <UrlField
-           fullWidth
-           label="Input URLs"
-           multiline
-           rows={6}
-           variant="outlined"
-           helpertext="Seperate urls by hitting enter"
-         />
-         <Margin margin={20} />
-         <FormRow role="row" width="45%">
-           <Label col={3} left>
-             Rename:
-           </Label>
-           <FormControl col={9}>
-             <RenameField
-               fullWidth
-               variant="outlined"
-               onChange={(e) => dispatch(newNameInput(e.target.value))}
-             />
+         
+           <UrlField
+             fullWidth
+             label="Input URLs"
+             multiline
+             rows={6}
+             variant="outlined"
+             helpertext="Seperate urls by hitting enter"
+           />
+           <Margin margin={20} />
+           <FormRow role="row" width="45%">
+             <Label col={3} left>
+               Rename:
+             </Label>
+             <FormControl col={9}>
+               <RenameField
+                 fullWidth
+                 variant="outlined"
+                 onChange={(e) => dispatch(newNameInput(e.target.value))}
+               />
+             </FormControl>
+           </FormRow>
+           <FormRow role="row" width="45%">
+             <Label col={3} left>
+               Location:{' '}
+             </Label>
+             <FormControl col={9}>
+               <ForderSelect
+                 value={forms.directory || ''}
+                 onChange={(e) => dispatch(changeDirectory(e.target.value))}
+                 folderbuttonClick={() => dispatch(getDirectory())}
+                 width="500px"
+                 labelWidth="80px"
+                 labelAlign="left"
+                 textAlign="left"
+               />
+             </FormControl>
+           </FormRow>
+
+           <FormControl fullWidth>
+             <Switch label="Advanced Options" onChange={toggleAdvanced} />
            </FormControl>
-         </FormRow>
-         <FormRow role="row" width="45%">
-           <Label col={3} left>
-             Location:{' '}
-           </Label>
-           <FormControl col={9}>
-             <ForderSelect
-               value={forms.directory || ''}
-               onChange={(e) => dispatch(changeDirectory(e.target.value))}
-               folderbuttonClick={() => dispatch(getDirectory())}
-               width="500px"
-               labelWidth="80px"
-               labelAlign="left"
-               textAlign="left"
-             />
-           </FormControl>
-         </FormRow>
 
-         <FormControl fullWidth>
-           <Switch label="Advanced Options" onChange={toggleAdvanced} />
-         </FormControl>
-
-         <CSSTransition
-           in={advanced}
-           timeout={250}
-           classNames="alert"
-           apear
-           unmountOnExit
-           onExited={() => setAdvanced(false)}
-         >
-           <AdvancedOptions forms={forms} />
-         </CSSTransition>
-
-         <div style={{ display: 'flex', flexDirection: 'row' }}>
-           <MTButton
-             cancebuttonl={1}
-             dark
-             onClick={() => dispatch(cancelTask())}
+           <CSSTransition
+             in={advanced}
+             timeout={250}
+             classNames="alert"
+             apear
+             unmountOnExit
+             onExited={() => setAdvanced(false)}
            >
-             Cancel
-           </MTButton>
-           <MTButton dark onClick={() => console.log('but')}>Add</MTButton>
-         </div>
+             <AdvancedOptions forms={forms} />
+           </CSSTransition>
+
+           <div style={{ display: 'flex', flexDirection: 'row' }}>
+             <MTButton
+               cancebuttonl={1}
+               dark
+               onClick={() => dispatch(cancelTask())}
+             >
+               Cancel
+             </MTButton>
+             <MTButton dark onClick={() => console.log('but')}>
+               Add
+             </MTButton>
+           </div>
+         
        </FormContainer>
      </NiftyModal>
    )

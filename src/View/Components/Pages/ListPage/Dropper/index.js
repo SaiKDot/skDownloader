@@ -9,7 +9,6 @@ const Dropper = props => {
       <BorderBox>
         <h1>DROP FILE</h1>
       </BorderBox>
-      {/* <Acrylic/> */}
     </Container>
   )
 }
@@ -19,15 +18,12 @@ const Container = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-
   margin-top: auto;
   margin-bottom: auto;
-
   align-content: center;
   justify-content: center;
   z-index: 99999;
   background: rgba(3, 3, 3, 5%);
-  /* box-shadow: 0 5px 20px 0 rgb(0 0 0 / 50%); */
   backdrop-filter: blur(5px);
 `
 const BorderBox = styled.div`
@@ -42,12 +38,5 @@ const BorderBox = styled.div`
     align-self: center;
     color: #333;
   }
-`
-const Acrylic = styled.div`
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-
 `
 export default Dropper 
