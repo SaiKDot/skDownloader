@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "web": "node .build/build.react.js",
-    "dev": "node .build/dev-runner.js"
+    "dev": "node .build/build.dev.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,20 @@
   "bugs": {
     "url": "https://github.com/SaiKDot/skDownloader/issues"
   },
+  "build": {
+    "productName": "BSK",
+    "appId": "BSK.App.n",
+    "afterPack": "./build/afterPackHook.js",
+    "afterSign": "electron-builder-notarize",
+    "fileAssociations": [
+      {
+        "ext": "torrent",
+        "mimeType": "application/x-bittorrent",
+        "name": "Torrent",
+        "role": "Viewer"
+      }
+    ]
+  },
   "homepage": "https://github.com/SaiKDot/skDownloader#readme",
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -26,6 +40,7 @@
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "@svgr/webpack": "^5.5.0",
+    "@welldone-software/why-did-you-render": "^6.2.3",
     "babel-loader": "^8.2.2",
     "cfonts": "^2.10.0",
     "cross-env": "^7.0.3",
@@ -36,8 +51,8 @@
     "electron-devtools-installer": "^3.2.0",
     "electron-edge-js": "^14.16.1",
     "electron-is": "^3.0.0",
-    "electron-log": "^4.4.1",
     "file-loader": "^6.2.0",
+    "forever-monitor": "^3.0.3",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.4.1",
@@ -53,15 +68,25 @@
     "@emotion/is-prop-valid": "^1.1.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@motrix/nat-api": "^0.3.2",
     "@mui/material": "^5.0.4",
     "@mui/styles": "^5.0.1",
+    "aria2": "^4.1.2",
     "axios": "^0.24.0",
     "electron": "^15.1.1",
+    "electron-log": "^4.4.3",
     "electron-store": "^8.0.1",
+    "electron-updater": "^4.6.1",
     "flatted": "^3.2.2",
+    "i18next": "^21.6.3",
     "immer": "^9.0.6",
     "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "node-fetch": "2.6.1",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -82,6 +107,7 @@
     "redux-electron-ipc": "^1.2.0",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.1",
-    "underscore": "^1.13.1"
+    "underscore": "^1.13.1",
+    "ws": "7.5.2"
   }
 }

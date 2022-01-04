@@ -42,6 +42,12 @@ input::-webkit-inner-spin-button {
 ::before {
   box-sizing: border-box;
 }
+*, *::after, *::before {
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
+ 
+}
 
 @media (prefers-reduced-motion: no-preference) {
   html {

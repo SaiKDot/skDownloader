@@ -2,7 +2,8 @@ import React, {useEffect, useRef, memo} from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import styled from 'styled-components'
 import { ResizableBox  } from 'react-resizable'
- 
+ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+ import { faSort } from '@fortawesome/free-solid-svg-icons'
  import _ from 'underscore'
 
 import { changeHeaderWidth, sortColumn } from '../../../Actions'
@@ -50,6 +51,7 @@ const handleSort = id => {
                onClick={handleSort(header.id)}
              >
                <HeaderText ref={getRef}>{header.name}</HeaderText>
+               <FontAwesomeIcon icon={faSort} />
              </Header>
            </ResizableBox>
          )
@@ -77,13 +79,13 @@ export const Header = styled.div`
   flex-direction: row;
   cursor: pointer;
   height: 100%;
-  &::after {
+  /* &::after {
     font-family: FontAwesome;
     content: '\f0dc';
     position: absolute;
     right: 8px;
     color: #999;
-  }
+  } */
   &:hover {
     background-color: #d9ebf9;
   }

@@ -12,7 +12,7 @@ import SidePanel from './SidePanel'
 import Header from '../../Header'
 import NewTaskModal from '../../Modal/NewTaskModal'
 import { changeHeaderWidth, changePanelWidth } from '../../../Actions'
-
+import { fetchList} from '../../../Actions/task'
 import 'react-virtualized/styles.css'
 import 'react-resizable/css/styles.css'
 
@@ -33,6 +33,17 @@ const ListPage = (props) => {
      
   }, [sidePanel_width])
 
+  useEffect(()=> {
+  //  const interval = setInterval(() => {
+  //   polling() 
+  //  }, 1000)
+  //  return () => clearInterval(interval)
+    polling()
+  },[])
+  const polling = () => {
+    
+     dispatch(fetchList())
+  }
   return (
     <Container>
       <NewTaskModal />

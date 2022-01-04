@@ -79,6 +79,7 @@ const Tippy = styled.div`
   margin: 0px;
   transform: translate(${(props) => props.x}px, ${(props) => props.y}px);
   z-index: 99999;
+  
 `
 const CtxMenuRoot = styled.div`
   margin: 0;
@@ -120,11 +121,14 @@ const Menubtn = styled.a`
   background: transparent;
   background-color: transparent;
   border: 0;
-  border-radius: 2px;
+  border-radius: 5px;
   &:hover {
     /* color: #fff; */
     color: #3a3c42;
     background-color: #d6d6d6;
+  }
+  & > span {
+    pointer-events: none;
   }
   & span:nth-child(2) {
     text-overflow: ellipsis;
@@ -135,6 +139,8 @@ const Menubtn = styled.a`
     line-height: 16px;
     letter-spacing: normal;
     text-transform: none;
+    pointer-events: none;
+    user-select: none;
   }
 `
 const MenuSeprator = styled.li`

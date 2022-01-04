@@ -2,5 +2,13 @@
 Todo:
   ✔ context menu @done(21-12-03 15:08)
   ☐ focus on items
-  ☐ change menu on hover and focus
+  ✔ change menu on hover and focus @done(21-12-23 13:35)
   ☐ add links by drop
+
+
+
+  MAin:   
+    ☐ opened at Login
+    ☐ Electron Store
+    ☐ single instance
+    ☐ theme manager

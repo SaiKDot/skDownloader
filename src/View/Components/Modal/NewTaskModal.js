@@ -46,7 +46,9 @@ const NewTaskModal = props => {
     const handleClose = () => {
       dispatch(toggleTaskModal())
     }
- 
+    const urlValurd = useEffect(() => {
+      
+    },[])
 
    return (
      <NiftyModal open={show} onClose={handleClose} width="65%">

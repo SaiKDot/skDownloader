@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash'
 import axios from 'axios'
-import { MAX_BT_TRACKER_LENGTH } from '@shared/constants'
+import { MAX_BT_TRACKER_LENGTH } from '@common/constants'
 
 export const fetchBtTrackerFromSource = async (source) => {
   if (isEmpty(source)) {

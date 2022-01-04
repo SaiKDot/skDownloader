@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron'
 import is from 'electron-is'
 import { isEmpty, clone } from 'lodash'
-import { Aria2 } from '@shared/aria2'
+import { Aria2 } from '@common/aria2'
 import {
   separateConfig,
   compactUndefined,
@@ -9,8 +9,8 @@ import {
   mergeTaskResult,
   changeKeysToCamelCase,
   changeKeysToKebabCase,
-} from '@shared/utils'
-import { ENGINE_RPC_HOST } from '@shared/constants'
+} from '@common/utils'
+import { ENGINE_RPC_HOST } from '@common/constants'
 
 export default class Api {
   constructor(options = {}) {
@@ -48,6 +48,7 @@ export default class Api {
 
   initClient() {
     const { rpcListenPort: port, rpcSecret: secret } = this.config
+    console.log('secret', secret)
     const host = ENGINE_RPC_HOST
     return new Aria2({
       host,
@@ -92,18 +93,18 @@ export default class Api {
     const config = {}
 
     if (!isEmpty(user)) {
-      console.info('[BSK] save user config: ', user)
+      console.info('[Motrix] save user config: ', user)
       config.user = user
     }
 
     if (!isEmpty(system)) {
-      console.info('[BSK] save system config: ', system)
+      console.info('[Motrix] save system config: ', system)
       config.system = system
       this.updateActiveTaskOption(system)
     }
 
     if (!isEmpty(others)) {
-      console.info('[BSK] save config found illegal key: ', others)
+      console.info('[Motrix] save config found illegal key: ', others)
     }
 
     ipcRenderer.send('command', 'application:save-preference', config)
@@ -174,7 +175,14 @@ export default class Api {
     })
     return this.client.multicall(tasks)
   }
- 
+
+  addTorrent(params) {
+    const { torrent, options } = params
+    const engineOptions = formatOptionsForEngine(options)
+    const args = compactUndefined([torrent, [], engineOptions])
+    return this.client.call('addTorrent', ...args)
+  }
+
   addMetalink(params) {
     const { metalink, options } = params
     const engineOptions = formatOptionsForEngine(options)
@@ -186,19 +194,28 @@ export default class Api {
     const { offset = 0, num = 20, keys } = params
     const activeArgs = compactUndefined([keys])
     const waitingArgs = compactUndefined([offset, num, keys])
+    const { rpcListenPort: port, rpcSecret: secret } = this.config
+        
+        const host = '127.0.0.1'
+        const port = 
+      let client = new Aria2({
+          host,
+          16800,
+          secret,
+        })
     return new Promise((resolve, reject) => {
-      this.client
+       client
         .multicall([
           ['aria2.tellActive', ...activeArgs],
           ['aria2.tellWaiting', ...waitingArgs],
         ])
         .then((data) => {
-          console.log('[BSK] fetch downloading task list data:', data)
+          console.log('[Motrix] fetch downloading task list data:', data)
           const result = mergeTaskResult(data)
           resolve(result)
         })
         .catch((err) => {
-          console.log('[BSK] fetch downloading task list fail:', err)
+          console.log('[Motrix] fetch downloading task list fail:', err)
           reject(err)
         })
     })
@@ -272,6 +289,7 @@ export default class Api {
   pauseTask(params = {}) {
     const { gid } = params
     const args = compactUndefined([gid])
+    console.log({ args })
     return this.client.call('pause', ...args)
   }
 

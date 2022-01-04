@@ -82,6 +82,8 @@ import { useHistory } from 'react-router-dom'
      }))
    })
    useEffect(() => {
+
+      
      const div = dropRef.current
      counter.current = 0
      div.addEventListener('dragenter', handleDragIn)
@@ -97,6 +99,7 @@ import { useHistory } from 'react-router-dom'
        div.removeEventListener('drop', handleDrop)
      }
    }, [])
+   
 
 
    const handleDragOver = useCallback((e) =>{

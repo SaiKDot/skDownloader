@@ -16,41 +16,39 @@ import { changeHeaderIcon } from '../../../Actions'
 
 
 
-const ListRow = React.memo((props) => {
-  const headerWidth = useSelector((state) => state.ui.headerWidth, _.isEqual)
-  const dispatch = useDispatch()
+const ListRow = props => {
+    const headerWidth = useSelector((state) => state.ui.headerWidth, _.isEqual)
+    const dispatch = useDispatch()
     const [selectedRows, setSelected] = useState([])
-  const { item, style, index, isSelected, ...rowProps } = props
-  const rowRefs = React.useRef([])
-  const prevRowRef = useRef(null)
- 
-  // useEffect(() => {
-  //   rowRefs.current = Array(arrLength)
-  //     .fill()
-  //     .map((_, i) => rowRefs.current[i] || React.createRef())
-    
-  // }, [listArr])
- 
- 
-  return (
-    <Row
-      style={style}
-      // ref={rowRefs.current[index]}
-      isSelected={isSelected}
-      {...rowProps}
-      
-    >
-      <RowContent>
-        <NameColumn item={item} />
-        <SizeRow item={item} />
-        <StatusRow item={item} />
-        <ProgressRow item={item} />
-        <LastTryRow item={item} />
-        <EtaRow item={item} />
-      </RowContent>
-    </Row>
-  )
-})
+    const { item, style, index, isSelected, ...rowProps } = props
+    const rowRefs = React.useRef([])
+    const prevRowRef = useRef(null)
+
+    // useEffect(() => {
+    //   rowRefs.current = Array(arrLength)
+    //     .fill()
+    //     .map((_, i) => rowRefs.current[i] || React.createRef())
+
+    // }, [listArr])
+
+    return (
+      <Row
+        style={style}
+        // ref={rowRefs.current[index]}
+        isSelected={isSelected}
+        {...rowProps}
+      >
+        <RowContent>
+          <NameColumn item={item} />
+          <SizeRow item={item} />
+          <StatusRow item={item} />
+          <ProgressRow item={item} />
+          <LastTryRow item={item} />
+          <EtaRow item={item} />
+        </RowContent>
+      </Row>
+    )
+}
 
 
 const NameColumn = props => {
@@ -87,8 +85,8 @@ const ProgressRow = props => {
   return (
     <Cell style={{ width: progressWidth }}>
       <Progress>
-        <ProgressBar />
         <span> 50% </span>
+        <ProgressBar />
       </Progress>
     </Cell>
   )
@@ -117,7 +115,7 @@ const Row = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-
+  cursor: pointer !important;
   background-color: ${({ isSelected }) => (isSelected ? '#0078D7' : '#fff')};
   /* transition: all 0.1s cubic-bezier(0.5, 0, 0, 1); */
   /* &:nth-child(odd) {
@@ -191,12 +189,15 @@ const Progress = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
-  height: 100%;
+  height: 40%;
   pointer-events: none;
+  margin-left: 10px;
+  margin-right: 10px;
   & > span {
     font-size: 12px;
+    margin-right: 10px;
   }
 `
 

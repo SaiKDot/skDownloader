@@ -33,3 +33,7 @@ export const CHANGE_DEFAULT_DIRECTORY = 'change_default_directory'
 
 /* input */
 export const GET_BULK_LINKS = 'get_bulk_links'
+
+
+
+export const FETCH_LIST = 'fetch_list'
